@@ -25,7 +25,15 @@ jobs:
         run: flutter create --project-name agent_management --platforms=android build_app
 
       - name: Copy app code
-        run: cp lib/main.dart build_app/lib/main.dart
+        run: run: |
+  if [ -f lib/main.dart ]; then
+    cp lib/main.dart build_app/lib/main.dart
+  elif [ -f main.dart ]; then
+    cp main.dart build_app/lib/main.dart
+  else
+    echo "main.dart file not found"
+    exit 1
+  fi
 
       - name: Build APK
         run: |
