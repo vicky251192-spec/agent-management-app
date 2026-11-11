@@ -1,3 +1,4 @@
+
 name: Build Agent Management APK
 
 on:
@@ -25,15 +26,15 @@ jobs:
         run: flutter create --project-name agent_management --platforms=android build_app
 
       - name: Copy app code
-        run: run: |
-  if [ -f lib/main.dart ]; then
-    cp lib/main.dart build_app/lib/main.dart
-  elif [ -f main.dart ]; then
-    cp main.dart build_app/lib/main.dart
-  else
-    echo "main.dart file not found"
-    exit 1
-  fi
+        run: |
+          if [ -f lib/main.dart ]; then
+            cp lib/main.dart build_app/lib/main.dart
+          elif [ -f main.dart ]; then
+            cp main.dart build_app/lib/main.dart
+          else
+            echo "main.dart file not found"
+            exit 1
+          fi
 
       - name: Build APK
         run: |
@@ -47,3 +48,4 @@ jobs:
         with:
           name: Agent-Management-APK
           path: build_app/build/app/outputs/flutter-apk/app-release.apk
+          
